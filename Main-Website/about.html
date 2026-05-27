@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Lucky Mystery Scoops</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="checkout-body">
+
+    <header class="main-header">
+        <div class="logo-container">
+            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                <img src="Logga v1.png" alt="Lucky Scoop Logo" class="logo">
+                <h1 class="lucky-title">Lucky Mystery Scoops</h1>
+            </a>
+        </div>
+
+        <nav class="nav-links">
+            <a href="index.html#home">Home</a>
+            <a href="index.html#how-it-works">How it works</a>
+            <a href="index.html#shop">Shop</a>
+            <a href="about.html">About us</a>
+        </nav>
+
+        <div class="header-icons">
+            <a href="https://www.tiktok.com/@lucky.mysteryscoop?_r=1&_t=ZN-96Qx06VUTvK" target="_blank" class="icon-link"><img src="Tik-Tok.png" class="social-icon"></a>
+            <a href="https://www.instagram.com/lucky.mystery.scoop?igsh=Y2NkdXpzMDN5bXI2&utm_source=qr" target="_blank" class="icon-link"><img src="Instagram.png" class="social-icon"></a>
+            <a href="checkout.html" class="icon-link cart-wrapper">
+                <img src="shopping_cart_24dp_EC4899_FILL0_wght400_GRAD0_opsz24.svg" class="cart-icon">
+                <span class="cart-badge" id="cart-count" style="display: none;">0</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="checkout-container">
+        <section class="checkout-card">
+            <h2>About Lucky Mystery Scoops</h2>
+            <p style="color: #555; line-height: 1.6; font-size: 18px;">
+                Welcome to the world of Lucky Mystery Scoops! We are dedicated to bringing you the most magical and mischievous treasures through our live scooping experience.
+            </p>
+            <p style="color: #555; line-height: 1.6; font-size: 18px; margin-top: 20px;">
+                Whether you're looking for gothic charms or pastel dreams, our scoops are filled with surprises that will brighten your day. Join our community and experience the thrill of the draw!
+            </p>
+            <div style="margin-top: 40px; text-align: center;">
+                <img src="Logga v1.png" alt="Lucky Scoop Logo" style="max-width: 200px; opacity: 0.8;">
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <p class="copyright">&copy; 2026 Lucky Mystery Scoops. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const badge = document.getElementById('cart-count');
+        if (cart.length > 0) {
+            badge.innerText = cart.length;
+            badge.style.display = 'flex';
+        }
+    </script>
+</body>
+</html>

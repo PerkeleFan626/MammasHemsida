@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Lucky Mystery Scoops</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Override for checkout header layout */
+        .checkout-header {
+            grid-template-columns: 1fr auto !important;
+            position: fixed !important; /* Fixed on top, doesn't follow scroll */
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .checkout-body {
+            padding-top: 80px; /* Space for the fixed header */
+        }
+    </style>
+</head>
+<body class="checkout-body">
+
+    <header class="main-header checkout-header">
+        <div class="logo-container">
+            <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                <img src="Logga v1.png" alt="Lucky Scoop Logo" class="logo">
+                <h1 class="lucky-title">Lucky Mystery Scoops</h1>
+            </a>
+        </div>
+        <div class="header-icons">
+            <a href="https://www.tiktok.com/@lucky.mysteryscoop?_r=1&_t=ZN-96Qx06VUTvK" target="_blank" class="icon-link"><img src="Tik-Tok.png" class="social-icon"></a>
+            <a href="https://www.instagram.com/lucky.mystery.scoop?igsh=Y2NkdXpzMDN5bXI2&utm_source=qr" target="_blank" class="icon-link"><img src="Instagram.png" class="social-icon"></a>
+            <a href="index.html" class="view-all" style="font-size: 14px; margin-left: 20px;">← Back to Shop</a>
+        </div>
+    </header>
+
+    <main class="checkout-container">
+        <div class="checkout-layout">
+            
+            <!-- LEFT COLUMN: FORMS -->
+            <div class="checkout-main">
+                <section class="checkout-card">
+                    <h2>Shipping Address</h2>
+                    <form class="checkout-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" placeholder="Melody">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" placeholder="Pink">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Street Address</label>
+                            <input type="text" placeholder="123 Kawaii Lane">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" placeholder="Tokyo">
+                            </div>
+                            <div class="form-group">
+                                <label>Postal Code</label>
+                                <input type="text" placeholder="123 45">
+                            </div>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="checkout-card">
+                    <h2>Order Preferences</h2>
+                    <div class="heart-checkbox-container">
+                        <label class="heart-checkbox">
+                            <input type="checkbox" id="tiktok-option">
+                            <span class="heart-checkmark"></span>
+                            Make a TikTok video of my scoop! (+ $0.00)
+                        </label>
+                    </div>
+                </section>
+
+                <section class="checkout-card">
+                    <h2>Payment Method</h2>
+                    <div class="payment-toggle">
+                        <button class="pay-btn active">Card</button>
+                    </div>
+                    
+                    <form class="checkout-form">
+                        <div class="form-group">
+                            <label>Card Number</label>
+                            <input type="text" placeholder="0000 0000 0000 0000">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Expiry</label>
+                                <input type="text" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input type="text" placeholder="123">
+                            </div>
+                        </div>
+                        
+                        <div class="heart-checkbox-container">
+                            <label class="heart-checkbox">
+                                <input type="checkbox">
+                                <span class="heart-checkmark"></span>
+                                Save card details for future mischief
+                            </label>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+            <!-- RIGHT COLUMN: SUMMARY -->
+            <aside class="checkout-sidebar">
+                <div class="summary-card sticky-summary">
+                    <h2>Your Scoop</h2>
+                    
+                    <div class="summary-items" id="summary-items">
+                        <!-- Dynamic content via JS -->
+                    </div>
+
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal">$0.00</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Shipping</span>
+                            <span class="free-text">FREE</span>
+                        </div>
+                        <div class="total-row grand-total">
+                            <span>Total</span>
+                            <span id="total">$0.00</span>
+                        </div>
+                    </div>
+
+                    <button class="place-order-btn">Place Order ♥</button>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-links" style="display: flex; justify-content: center; gap: 40px; margin-bottom: 25px;">
+                <a href="#" style="color: #EC4899; text-decoration: none; font-weight: 600; font-size: 15px;">Privacy Policy</a>
+                <a href="#" style="color: #EC4899; text-decoration: none; font-weight: 600; font-size: 15px;">Terms of Service</a>
+                <a href="contact.html" style="color: #EC4899; text-decoration: none; font-weight: 600; font-size: 15px;">Contact Us</a>
+            </div>
+            <p class="copyright">&copy; 2026 Lucky Mystery Scoops. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Load cart from localStorage and render summary
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const summaryContainer = document.getElementById('summary-items');
+        const subtotalEl = document.getElementById('subtotal');
+        const totalEl = document.getElementById('total');
+
+        function renderSummary() {
+            let subtotal = 0;
+
+            if (cart.length === 0) {
+                summaryContainer.innerHTML = '<p style="color: #888; font-style: italic; margin-bottom: 20px;">Your cart is empty! Time for some mischief?</p>';
+            } else {
+                summaryContainer.innerHTML = '';
+                cart.forEach((item, index) => {
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'summary-item';
+                    itemEl.innerHTML = `
+                        <div class="item-info">
+                            <span class="item-name">${item.name}</span>
+                            <div style="display: flex; align-items: center;">
+                                <span class="item-price">${item.price}</span>
+                                <button class="remove-item-btn" onclick="removeItem(${index})">×</button>
+                            </div>
+                        </div>
+                    `;
+                    summaryContainer.appendChild(itemEl);
+                    
+                    // Extract price value (remove $ and parse)
+                    const priceValue = parseFloat(item.price.replace('$', ''));
+                    subtotal += priceValue;
+                });
+            }
+
+            subtotalEl.innerText = `$${subtotal.toFixed(2)}`;
+            totalEl.innerText = `$${subtotal.toFixed(2)}`;
+        }
+
+        window.removeItem = function(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            renderSummary();
+        };
+
+        // Initial render
+        renderSummary();
+    </script>
+</body>
+</html>
