@@ -1,0 +1,83 @@
+<main class="checkout-container">
+    <div class="checkout-layout">
+        
+        <!-- LEFT COLUMN: CART ITEMS & PREFERENCES -->
+        <div class="checkout-main">
+            <section class="checkout-card">
+                <h2>Your Scoop Cart</h2>
+                {% if cart.item_count > 0 %}
+                    <form action="/cart" method="post" novalidate>
+                        <div class="summary-items">
+                            {% for item in cart.items %}
+                                <div class="summary-item" style="margin-bottom: 20px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px;">
+                                    <div class="item-info" style="display: flex; justify-content: space-between; align-items: center;">
+                                        <div style="display: flex; align-items: center; gap: 15px;">
+                                            <img src="{{ item.image | img_url: '100x100' }}" alt="{{ item.title | escape }}" style="border-radius: 8px;">
+                                            <div>
+                                                <span class="item-name" style="font-weight: 600; display: block;">{{ item.product.title }}</span>
+                                                <span class="item-variant" style="font-size: 14px; color: #888;">{{ item.variant.title }}</span>
+                                            </div>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 20px;">
+                                            <span class="item-price">{{ item.line_price | money }}</span>
+                                            <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="remove-item-btn" style="text-decoration: none; color: #EC4899; font-size: 20px;">×</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <section class="checkout-card" style="padding: 0; margin-top: 30px; box-shadow: none;">
+                            <h2>Order Preferences</h2>
+                            <div class="heart-checkbox-container">
+                                <label class="heart-checkbox">
+                                    <input type="checkbox" name="attributes[TikTok Video]" value="Yes" {% if cart.attributes["TikTok Video"] == "Yes" %}checked{% endif %}>
+                                    <span class="heart-checkmark"></span>
+                                    Make a TikTok video of my scoop! (+ $0.00)
+                                </label>
+                            </div>
+                        </section>
+
+                        <div style="margin-top: 30px;">
+                            <button type="submit" name="checkout" class="place-order-btn">Proceed to Checkout ♥</button>
+                        </div>
+                    </form>
+                {% else %}
+                    <div style="text-align: center; padding: 40px 0;">
+                        <p style="color: #888; font-style: italic; margin-bottom: 20px;">Your cart is empty! Time for some mischief?</p>
+                        <a href="/" class="btn-primary" style="display: inline-block; text-decoration: none;">Go Shopping ♥</a>
+                    </div>
+                {% endif %}
+            </section>
+        </div>
+
+        <!-- RIGHT COLUMN: SUMMARY -->
+        {% if cart.item_count > 0 %}
+            <aside class="checkout-sidebar">
+                <div class="summary-card sticky-summary">
+                    <h2>Order Summary</h2>
+                    
+                    <div class="summary-totals">
+                        <div class="total-row">
+                            <span>Subtotal</span>
+                            <span>{{ cart.total_price | money }}</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Shipping</span>
+                            <span class="free-text">Calculated at checkout</span>
+                        </div>
+                        <div class="total-row grand-total">
+                            <span>Total</span>
+                            <span>{{ cart.total_price | money }}</span>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 12px; color: #888; margin-top: 15px; text-align: center;">
+                        Taxes and shipping calculated at checkout.
+                    </p>
+                </div>
+            </aside>
+        {% endif %}
+
+    </div>
+</main>

@@ -1,0 +1,31 @@
+<main class="checkout-container">
+    <section class="checkout-card" style="max-width: 600px; margin: 0 auto;">
+        <h2>Send us a Message ♥</h2>
+        
+        {% form 'contact' %}
+            {% if form.posted_successfully? %}
+                <p class="form-success">Thanks for reaching out! We'll get back to you soon. ♥</p>
+            {% endif %}
+
+            {{ form.errors | default_errors }}
+
+            <div class="form-group">
+                <label for="ContactFormName">Your Name</label>
+                <input type="text" id="ContactFormName" name="contact[name]" placeholder="Melody Pink">
+            </div>
+            <div class="form-group">
+                <label for="ContactFormEmail">Email Address</label>
+                <input type="email" id="ContactFormEmail" name="contact[email]" placeholder="melody@example.com" style="padding: 14px; border: 2px solid #f0f0f0; border-radius: 12px; font-size: 16px;">
+            </div>
+            <div class="form-group">
+                <label for="ContactFormSubject">Subject</label>
+                <input type="text" id="ContactFormSubject" name="contact[subject]" placeholder="Question about my scoop">
+            </div>
+            <div class="form-group">
+                <label for="ContactFormMessage">Message</label>
+                <textarea id="ContactFormMessage" name="contact[body]" placeholder="Write your message here..." style="padding: 14px; border: 2px solid #f0f0f0; border-radius: 12px; font-size: 16px; font-family: inherit; min-height: 150px;"></textarea>
+            </div>
+            <button type="submit" class="place-order-btn">Send Message ♥</button>
+        {% endform %}
+    </section>
+</main>
